@@ -1,21 +1,17 @@
 package com.workshop.nearbyplaces.model;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
-@Data
-public class PlaceOpeningHoursPeriod {
+public class Bounds {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    private LatLngLiteral northeast;
 
     @OneToOne
-    private PlaceOpeningHoursPeriodDetail open;
-
-    @OneToOne
-    private PlaceOpeningHoursPeriodDetail close;
+    private LatLngLiteral southwest;
 }

@@ -1,8 +1,20 @@
 package com.workshop.nearbyplaces.model;
 
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Data
+@Entity
 public class Place {
 
-    private AddressComponent[] addressComponents;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToMany
+    private List<AddressComponent> addressComponents;
 
     private String adr_address;
 
@@ -12,6 +24,7 @@ public class Place {
 
     private String formatted_phone_number;
 
+    @OneToOne
     private Geometry geometry;
 
     private String icon;
@@ -24,21 +37,28 @@ public class Place {
 
     private String name;
 
+    @OneToOne
     private PlaceOpeningHours opening_hours;
 
-    private PlacePhoto[] photos;
+    @OneToMany
+    private List<PlacePhoto> photos;
 
     private String place_id;
 
+    @OneToOne
     private PlusCode plus_code;
 
     private Integer price_level;
 
     private Float rating;
 
-    private PlaceReview[] reviews;
+    @OneToMany
+    private List<PlaceReview> reviews;
 
-    private String[] types;
+    @ElementCollection
+    @CollectionTable(name = "place_type", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "types")
+    private List<String> types;
 
     private String url;
 
