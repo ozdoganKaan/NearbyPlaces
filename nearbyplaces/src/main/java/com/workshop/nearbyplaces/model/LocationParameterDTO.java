@@ -10,8 +10,11 @@ import javax.persistence.Id;
 
 @NoArgsConstructor
 @Data
+@Entity
 public class LocationParameterDTO {
 
+    @Id
+    private Long id;
 
     private double longitude;
 
