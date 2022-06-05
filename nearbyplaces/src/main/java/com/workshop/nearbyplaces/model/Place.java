@@ -5,15 +5,15 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
 @Entity
-public class Place {
+@Data
+public class Place{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
     private List<AddressComponent> addressComponents;
 
     private String adr_address;
@@ -24,7 +24,8 @@ public class Place {
 
     private String formatted_phone_number;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "geometry_id", referencedColumnName = "id")
     private Geometry geometry;
 
     private String icon;
@@ -37,22 +38,24 @@ public class Place {
 
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "opening_hours_id", referencedColumnName = "id")
     private PlaceOpeningHours opening_hours;
 
-    @OneToMany
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
     private List<PlacePhoto> photos;
 
     private String place_id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "plus_code_id", referencedColumnName = "id")
     private PlusCode plus_code;
 
     private Integer price_level;
 
     private Float rating;
 
-    @OneToMany
+    @OneToMany(mappedBy = "place",cascade = CascadeType.ALL)
     private List<PlaceReview> reviews;
 
     @ElementCollection
@@ -69,5 +72,10 @@ public class Place {
     private String vicinity;
 
     private String website;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "location_register_id")
+    private LocationRegister locationRegister;
+    
 
 }

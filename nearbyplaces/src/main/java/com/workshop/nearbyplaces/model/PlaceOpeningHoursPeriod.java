@@ -13,9 +13,16 @@ public class PlaceOpeningHoursPeriod {
     private Long id;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "open_id", referencedColumnName = "id")
     private PlaceOpeningHoursPeriodDetail open;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "close_id", referencedColumnName = "id")
     private PlaceOpeningHoursPeriodDetail close;
+
+    @OneToOne(mappedBy = "periods")
+    private PlaceOpeningHours placeOpeningHoursPeriods;
+
+
 }

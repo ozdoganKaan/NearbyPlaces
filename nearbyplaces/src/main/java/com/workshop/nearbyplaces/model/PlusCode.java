@@ -1,10 +1,10 @@
 package com.workshop.nearbyplaces.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Data
 @Entity
 public class PlusCode {
 
@@ -15,4 +15,7 @@ public class PlusCode {
     private String global_code;
 
     private String compound_code;
+
+    @OneToOne(mappedBy = "plus_code")
+    private Place place;
 }

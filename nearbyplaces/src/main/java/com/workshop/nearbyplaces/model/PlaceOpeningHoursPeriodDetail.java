@@ -1,20 +1,25 @@
 package com.workshop.nearbyplaces.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
+@Data
 public class PlaceOpeningHoursPeriodDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private Integer day;
 
     private String time;
+
+    @OneToOne(mappedBy = "open")
+    private PlaceOpeningHoursPeriod placeOpeningHoursPeriodOpen;
+
+    @OneToOne(mappedBy = "close")
+    private PlaceOpeningHoursPeriod placeOpeningHoursPeriodClose;
 
 }

@@ -20,10 +20,11 @@ public class PlacePhoto {
     @Column(name = "html_attributions")
     private List<String> html_attributions;
 
-    @ElementCollection
-    @CollectionTable(name = "place_photo_reference", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "photo_reference")
-    private List<String> photo_reference;
+    private String photo_reference;
 
     private Integer width;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id")
+    private Place place;
 }

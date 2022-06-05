@@ -1,8 +1,12 @@
 package com.workshop.nearbyplaces.controller;
 
-import com.workshop.nearbyplaces.service.LocationParameterService;
+import com.workshop.nearbyplaces.model.PlaceDTO;
+import com.workshop.nearbyplaces.model.PlaceData;
+import com.workshop.nearbyplaces.service.LocationRegisterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/place")
@@ -10,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class PlaceController {
 
-    private final LocationParameterService locationParameterService;
+    private final LocationRegisterService locationRegisterService;
 
     @GetMapping("/nearby")
-    public void getNearbyPlaces(@RequestParam("lat") Double lat,
-                                @RequestParam("lng") Double lng,
-                                @RequestParam("radius") Double radius){
-            locationParameterService.getNearbyPlaces(lat,lng,radius);
+    public List<PlaceData> getNearbyPlaces(@RequestParam("lat") Double lat,
+                                           @RequestParam("lng") Double lng,
+                                           @RequestParam("radius") Double radius){
+           return locationRegisterService.getNearbyPlaces(lat,lng,radius);
     }
 }

@@ -21,4 +21,8 @@ public class AddressComponent {
     @CollectionTable(name = "ac_type", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "types")
    private List<String> types;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id")
+    private Place place;
 }

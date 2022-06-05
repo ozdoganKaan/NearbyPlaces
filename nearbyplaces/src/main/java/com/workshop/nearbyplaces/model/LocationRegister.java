@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-public class LocationParameter {
+public class LocationRegister {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,7 @@ public class LocationParameter {
 
     private double radius;
 
-    //@ElementCollection
-    //@CollectionTable(name = "place_list", joinColumns = @JoinColumn(name = "id"))
-    //@Column(name = "place")
-    @OneToMany
-    private List<Place> place;
+    @OneToMany(mappedBy = "locationRegister", cascade = CascadeType.ALL)
+    private List<Place> places = new ArrayList<>();
 
 }

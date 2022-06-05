@@ -1,19 +1,30 @@
 package com.workshop.nearbyplaces.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
+@Data
 public class LatLngLiteral {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer lat;
+    private Double lat;
 
-    private Integer lng;
+    private Double lng;
+
+    @OneToOne(mappedBy = "location")
+    private Geometry geometry;
+
+    @OneToOne(mappedBy = "northeast")
+    private Bounds northeast_bounds;
+
+    @OneToOne(mappedBy = "southwest")
+    private Bounds southwest_bounds;
+
+
 
 }

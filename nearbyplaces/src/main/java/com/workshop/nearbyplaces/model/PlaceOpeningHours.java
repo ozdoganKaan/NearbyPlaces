@@ -15,11 +15,16 @@ public class PlaceOpeningHours {
 
     private Boolean open_now;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "periods_id", referencedColumnName = "id")
     private PlaceOpeningHoursPeriod periods;
 
     @ElementCollection
     @CollectionTable(name = "place_opening_hours_weekday_text", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "weekday_text")
     private List<String> weekday_text;
+
+
+    @OneToOne(mappedBy = "opening_hours")
+    private Place place;
 }
